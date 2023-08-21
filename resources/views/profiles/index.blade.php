@@ -7,7 +7,10 @@
             <img src="/img/kokopanda.jpg" class="rounded-circle img-fluid" alt="">
         </div>
         <div class="col-9 ps-3 pt-5">
-            <div><h1>{{ $user->username }}</h1></div>
+            <div class='d-flex justify-content-between align-items-baseline'>
+                <h1>{{ $user->username }}</h1>
+                <a href="#">Add New Post</a>
+            </div>
             <div class="d-flex gap-4">
                 <div><strong>153</strong> posts</div>
                 <div><strong>10k</strong> followers</div>
