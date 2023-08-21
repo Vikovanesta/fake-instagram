@@ -3,19 +3,19 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-3 pt-5 px-5">
-            <img src="/img/kokopanda.jpg" width="200px" height="auto" class="rounded-circle" alt="">
+        <div class="col-3 d-flex align-items-center">
+            <img src="/img/kokopanda.jpg" class="rounded-circle img-fluid" alt="">
         </div>
-        <div class="col-9 ps-5 pt-5">
+        <div class="col-9 ps-3 pt-5">
             <div><h1>{{ $user->username }}</h1></div>
             <div class="d-flex gap-4">
                 <div><strong>153</strong> posts</div>
                 <div><strong>10k</strong> followers</div>
                 <div><strong>101</strong> following</div>
             </div>
-            <div class="pt-4 fw-bold">Hailpanda.co.id</div>
-            <div>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem, provident.</div>
-            <div><a href="#">www.hailpanda.co.id</a></div>
+            <div class="pt-4 fw-bold">{{ $user->profile->title }}</div>
+            <div>{{ $user->profile->description }}</div>
+            <div><a href="#">{{ $user->profile->url }}</a></div>
         </div>
     </div>
     <div class="row pt-5">
