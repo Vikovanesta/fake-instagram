@@ -24,3 +24,5 @@ Route::get('/profile/{user}', [App\Http\Controllers\ProfilesController::class, '
 Route::get('/post/create', [App\Http\Controllers\PostsController::class, 'create']);
 
 Route::post('/post', [App\Http\Controllers\PostsController::class, 'store']);
+
+Route::get('/post/{post}', [App\Http\Controllers\PostsController::class, 'show']);
