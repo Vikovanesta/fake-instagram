@@ -9,9 +9,19 @@
         <div class="col-9 ps-3 pt-5">
             <div class='d-flex justify-content-between align-items-baseline'>
                 <h1>{{ $user->username }}</h1>
-                <a href="/post/create">Add New Post</a>
+
+                {{-- Only visible when user is the owner of this profile --}}
+                @can('update', $user->profile)
+                    <a href="/post/create">Add New Post</a>
+                @endcan
+                
             </div>
-            <a href="/profile/{{ $user->id }}/edit">Edit Profile</a>
+            
+            {{-- Only visible when user is the owner of this profile --}}
+            @can('update', $user->profile)
+                <a href="/profile/{{ $user->id }}/edit">Edit Profile</a>
+            @endcan
+
             <div class="d-flex gap-4">
                 <div><strong>{{  $user->posts->count() }}</strong> posts</div>
                 <div><strong>10k</strong> followers</div>

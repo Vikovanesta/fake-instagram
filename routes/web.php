@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Note: route order matter
+// Tip: put route with variable in bottom
+
 Route::get('/', function () {
     return view('welcome');
 });
