@@ -40,14 +40,16 @@ class ProfilesController extends Controller
             
             $image = Image::make(public_path("storage/{$imagePath}"))->fit(1000, 1000);
             $image->save();
+
+            $imageArray = ['image' => $imagePath];
         }
 
-        // Update image column in database (image format: path where the image is stored)
+        // Update 'image' column in database ('image' format: path where the image is stored)
         // eg. 'image' => "profile/imageName.jpeg"
         // array_merge() is used to convert image to image path
         auth()->user()->profile->update(array_merge(
             $data,
-            ['image' => $imagePath]
+            $imageArray ?? []  //return empty array if no image provided
         ));
         
         return redirect("/profile/{$user->id}");
