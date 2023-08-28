@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 
 class ProfilesController extends Controller
@@ -32,8 +33,23 @@ class ProfilesController extends Controller
             'image' => '',
         ]);
 
-        auth()->user()->profile->update($data);
+        
+        // If the request has an image, save image to storage/$imagePath
+        if (request('image')) {
+            $imagePath = request('image')->store('profile', 'public');
+            
+            $image = Image::make(public_path("storage/{$imagePath}"))->fit(1000, 1000);
+            $image->save();
+        }
 
+        // Update image column in database (image format: path where the image is stored)
+        // eg. 'image' => "profile/imageName.jpeg"
+        // array_merge() is used to convert image to image path
+        auth()->user()->profile->update(array_merge(
+            $data,
+            ['image' => $imagePath]
+        ));
+        
         return redirect("/profile/{$user->id}");
     }
 }

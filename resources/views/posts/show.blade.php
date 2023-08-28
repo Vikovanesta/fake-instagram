@@ -8,8 +8,20 @@
         </div>
         <div class="col-4">
             <div>
-                <h3>{{ $post->user->username }}</h3>
-                <p>{{ $post->caption }}</p>
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <img src="/storage/{{ $post->user->profile->image }}" class="rounded-circle img-fluid" style="max-height: 40px">
+                    <span class="m-0 fw-semibold">
+                        <a class="text-dark text-decoration-none" href="/profile/{{ $post->user->id }}">{{ $post->user->username }}</a>
+                    </span>
+                    -
+                    <a class="text-decoration-none" href="#">Follow</a>
+                </div>
+                <hr>
+                <p>
+                    <span class="m-0 fw-semibold">
+                        <a class="text-dark text-decoration-none" href="/profile/{{ $post->user->id }}">{{ $post->user->username }}</a>
+                    </span> {{ $post->caption }}
+                </p>
             </div>
         </div>
     </div>

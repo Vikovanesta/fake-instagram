@@ -43,6 +43,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // Do this booting new user model
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Create a profile after user is created
+        // created: event that fired after new user is created
+        static::created(function ($user) {
+            $user->profile()->create([
+                'title' => $user->username,
+            ]);
+        });
+    }
  
     public function profile()
     {

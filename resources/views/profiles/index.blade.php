@@ -4,20 +4,20 @@
 <div class="container">
     <div class="row">
         <div class="col-3 d-flex align-items-center">
-            <img src="/img/kokopanda.jpg" class="rounded-circle img-fluid" alt="">
+            <img src="/storage/{{ $user->profile->image }}" class="rounded-circle img-fluid" alt="">
         </div>
         <div class="col-9 ps-3 pt-5">
             <div class='d-flex justify-content-between align-items-baseline'>
                 <h1>{{ $user->username }}</h1>
 
-                {{-- Only visible when user is the owner of this profile --}}
+                {{-- Only visible when user is allow to update this profile --}}
                 @can('update', $user->profile)
                     <a href="/post/create">Add New Post</a>
                 @endcan
                 
             </div>
             
-            {{-- Only visible when user is the owner of this profile --}}
+            {{-- Only visible when user is allowed to update this profile --}}
             @can('update', $user->profile)
                 <a href="/profile/{{ $user->id }}/edit">Edit Profile</a>
             @endcan
