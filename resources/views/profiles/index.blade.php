@@ -8,7 +8,10 @@
         </div>
         <div class="col-9 ps-3 pt-5">
             <div class='d-flex justify-content-between align-items-baseline'>
-                <h1>{{ $user->username }}</h1>
+                <div class="d-flex gap-3 align-items-center">
+                    <h1>{{ $user->username }}</h1>
+                    <follow-button user-id="{{ $user->id }}"></follow-button>
+                </div>
 
                 {{-- Only visible when user is allow to update this profile --}}
                 @can('update', $user->profile)
