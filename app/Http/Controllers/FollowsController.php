@@ -7,8 +7,14 @@ use Illuminate\Http\Request;
 
 class FollowsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(('auth'));
+    }
+
     public function store(User $user)
     {
-        return $user->username;
+        // When click button will follow -> toggle -> when click button will unfollow
+        return auth()->user()->following()->toggle($user->profile);
     }
 }

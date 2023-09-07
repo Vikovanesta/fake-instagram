@@ -10,7 +10,7 @@
             <div class='d-flex justify-content-between align-items-baseline'>
                 <div class="d-flex gap-3 align-items-center">
                     <h1>{{ $user->username }}</h1>
-                    <follow-button user-id="{{ $user->id }}"></follow-button>
+                    <follow-button user-id="{{ $user->id }}" follows="{{ $follows }}"></follow-button>
                 </div>
 
                 {{-- Only visible when user is allow to update this profile --}}
@@ -27,8 +27,8 @@
 
             <div class="d-flex gap-4">
                 <div><strong>{{  $user->posts->count() }}</strong> posts</div>
-                <div><strong>10k</strong> followers</div>
-                <div><strong>101</strong> following</div>
+                <div><strong>{{ $user->profile->followers->count() }}</strong> followers</div>
+                <div><strong>{{ $user->following->count() }}</strong> following</div>
             </div>
             <div class="pt-4 fw-bold">{{ $user->profile->title }}</div>
             <div>{{ $user->profile->description }}</div>
