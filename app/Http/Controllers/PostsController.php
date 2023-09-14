@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use Intervention\Image\Facades\Image;
-use App\Models\Profile;
-use GuzzleHttp\Promise\Create;
-use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
@@ -26,17 +23,17 @@ class PostsController extends Controller
             'image' => ['required', 'image'],
         ]);
 
-         $imagePath = request('image')->store('uploads', 'public');
+        $imagePath = request('image')->store('uploads', 'public');
 
-         $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200, 1200);
-         $image->save();
+        $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200, 1200);
+        $image->save();
 
         auth()->user()->posts()->create([
             'caption' => $data['caption'],
             'image' => $imagePath,
         ]);
 
-        return redirect('/profile/' .  auth()->user()->id);
+        return redirect('/profile/'.auth()->user()->id);
     }
 
     public function show(\App\Models\Post $post)

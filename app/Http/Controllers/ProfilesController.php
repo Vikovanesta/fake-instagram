@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class ProfilesController extends Controller
 {
@@ -19,11 +19,11 @@ class ProfilesController extends Controller
     {
         // User cannot edit if they're not the owner of said profile
         $this->authorize('update', $user->profile);
-        
+
         return view('profiles.edit', compact('user'));
     }
-    
-    public function update(User $user) 
+
+    public function update(User $user)
     {
         // User cannot update if they're not the owner of said profile
         $this->authorize('update', $user->profile);
@@ -35,11 +35,10 @@ class ProfilesController extends Controller
             'image' => '',
         ]);
 
-        
         // If the request has an image, save image to storage/$imagePath
         if (request('image')) {
             $imagePath = request('image')->store('profile', 'public');
-            
+
             $image = Image::make(public_path("storage/{$imagePath}"))->fit(1000, 1000);
             $image->save();
 
@@ -53,7 +52,7 @@ class ProfilesController extends Controller
             $data,
             $imageArray ?? []  //return empty array if no image provided
         ));
-        
+
         return redirect("/profile/{$user->id}");
     }
 }
